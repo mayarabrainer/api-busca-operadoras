@@ -18,7 +18,7 @@ Este projeto consiste em uma API desenvolvida em **Python** utilizando **Flask**
 
 A coleção do Postman foi criada para interagir com a API. Abaixo está uma captura de tela da coleção com as requisições configuradas:
 
-![Coleção Postman](../public/img/colecao-postman.png)
+![Coleção Postman](./public/img/colecao-postman.png)
 
 ---
 
@@ -46,9 +46,6 @@ venv\Scripts\activate
 # No Linux/macOS:
 python3 -m venv venv
 source venv/bin/activate
-
-# Instalar as dependências
-pip install -r requirements.txt
 
 # Executar o servidor
 python app.py
