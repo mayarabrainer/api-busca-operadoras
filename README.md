@@ -47,6 +47,9 @@ venv\Scripts\activate
 python3 -m venv venv
 source venv/bin/activate
 
+# Instalar as dependências
+pip install -r requirements.txt
+
 # Executar o servidor
 python app.py
 ---
