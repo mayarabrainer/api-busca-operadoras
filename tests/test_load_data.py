@@ -11,3 +11,6 @@ def test_load_operators():
     assert len(operators) == 1
     assert operators[0]["Telefone"] == "(11) 987654321"
     assert operators[0]["Razao_Social"] == "Empresa X"
+    assert operators[0]["Cidade"] == "Sao paulo"
+    assert operators[0]["UF"]== "SP"
+    assert operators[0]["Endereco_eletronico"] == "email@empresax.com"
