@@ -18,7 +18,7 @@ Este projeto consiste em uma API desenvolvida em **Python** utilizando **Flask**
 
 A coleção do Postman foi criada para interagir com a API. Abaixo está uma captura de tela da coleção com as requisições configuradas:
 
-![Coleção Postman](./public/img/colecao-postman.png)
+![Coleção Postman](./public/img/postman-collection.png)
 
 ---
 

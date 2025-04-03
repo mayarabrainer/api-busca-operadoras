@@ -6,44 +6,44 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-def formatar_telefone(ddd, numero):
-    return f"({ddd}) {numero}"
+def format_phone(area_code, number):
+    return f"({area_code}) {number}"
 
-def carregar_operadoras():
-    operadoras = []
-    csv_path = os.path.join(os.path.dirname(__file__), 'Relatorio_cadop.csv')
+def load_operators():
+    operators = []
+    csv_path = os.path.join(os.path.dirname(__file__), 'Operator_Report.csv')
     
     with open(csv_path, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file, delimiter=';', quotechar='"')
         for row in reader:
-            ddd = row["DDD"].split(";")[1] if ";" in row["DDD"] else row["DDD"]
-            numero = row["Telefone"].split(";")[1] if ";" in row["Telefone"] else row["Telefone"]
-            row["Telefone"] = formatar_telefone(ddd, numero)
-            operadoras.append(row)
-    return operadoras
+            area_code = row["DDD"].split(";")[1] if ";" in row["DDD"] else row["DDD"]
+            number = row["Telefone"].split(";")[1] if ";" in row["Telefone"] else row["Telefone"]
+            row["Telefone"] = format_phone(area_code, number)
+            operators.append(row)
+    return operators
 
 @app.route('/')
 def health_check():
-    return jsonify({"status": "ok", "message": "API operacional"})
+    return jsonify({"status": "ok", "message": "API is operational"})
 
-@app.route('/buscar_operadoras', methods=['GET'])
-def buscar_operadoras():
-    termo_busca = request.args.get('q', '').lower()
-    operadoras = carregar_operadoras()
+@app.route('/search_operators', methods=['GET'])
+def search_operators():
+    search_term = request.args.get('q', '').lower()
+    operators = load_operators()
     
-    resultado = [
+    result = [
         {
-            "Razao_Social": op["Razao_Social"],
+            "Business_Name": op["Razao_Social"],
             "CNPJ": op["CNPJ"],
-            "Cidade": op["Cidade"],
-            "UF": op["UF"],
-            "Telefone": op["Telefone"],
-            "Endereco_eletronico": op["Endereco_eletronico"],
+            "City": op["Cidade"],
+            "State": op["UF"],
+            "Phone": op["Telefone"],
+            "Email": op["Endereco_eletronico"],
         }
-        for op in operadoras
-        if termo_busca in op["Razao_Social"].lower() or termo_busca in op["CNPJ"].lower()
+        for op in operators
+        if search_term in op["Razao_Social"].lower() or search_term in op["CNPJ"].lower()
     ]
-    return jsonify(resultado)
+    return jsonify(result)
 
 if __name__ == '__main__':
     import argparse
